@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/auth_kakaologin_header"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="64dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="안녕하세요."
+            android:textColor="@color/colorWhite"
+            android:textSize="32sp"
+            android:layout_margin="16dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="알바관리와 매장 관리 어플 MnA 입니다."
+            android:textColor="@color/colorWhite"/>
+        <ImageView
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/logo_admin"
+            android:layout_margin="16dp"/>
+    </LinearLayout>
+
+    <com.kakao.usermgmt.LoginButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
