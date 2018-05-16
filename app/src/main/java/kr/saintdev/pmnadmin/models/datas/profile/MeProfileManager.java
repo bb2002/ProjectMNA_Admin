@@ -74,4 +74,9 @@ public class MeProfileManager {
         pst.bindString(5, profile.getMnaPublicID());
         pst.execute();
     }
+
+    public void clear() {
+        String sql = "DELETE FROM mna_admin_profile";
+        dbHelper.sendWriteableQuery(sql);
+    }
 }
