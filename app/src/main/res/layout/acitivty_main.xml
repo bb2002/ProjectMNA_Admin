@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:id="@+id/main_nav_container"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorWhite">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/main_navbutton_staff"
+            android:src="@drawable/ic_staff"
+            android:scaleType="centerInside"
+            android:background="@null"
+            android:padding="8dp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/main_navbutton_store"
+            android:src="@drawable/ic_store"
+            android:scaleType="centerInside"
+            android:background="@null"
+            android:padding="8dp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/main_navbutton_alarm"
+            android:src="@drawable/ic_alarm"
+            android:scaleType="centerInside"
+            android:background="@null"
+            android:padding="8dp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/main_navbutton_settings"
+            android:src="@drawable/ic_settings"
+            android:scaleType="centerInside"
+            android:background="@null"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/main_container"
+        android:layout_above="@id/main_nav_container" />
+</RelativeLayout>

@@ -3,6 +3,8 @@ package kr.saintdev.pmnadmin.views.fragments.auth;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -91,11 +93,13 @@ public class LoadingFragment extends SuperFragment {
             String kakaoProfile = result.getProfileImagePath();
             OnBackgroundWorkHandler handler = new OnBackgroundWorkHandler();
 
+
+            args.put("kakao-nick", kakaoNick);
+            args.put("kakao-profile-icon", kakaoProfile);
+
             if(profile == null) {
                 // 회원가입 처리를 한다.
-                args.put("kakao-id", kakaoId);
-                args.put("kakao-nick", kakaoNick);
-                args.put("kakao-profile-icon", kakaoProfile);
+                args.put("X-kakao-id", kakaoId);
 
                 requester = new HttpRequester(InternetConst.CREATE_ACCOUNT, args, REQUEST_CREATE_ACCOUNT, handler, control);
             } else {
@@ -121,8 +125,6 @@ public class LoadingFragment extends SuperFragment {
                 dm.setDescription("Internal server error.\n" + httpResp.getErrorMessage());
                 dm.show();
             } else {
-                Intent startActivity = null;
-
                 try {
                     if (requestCode == REQUEST_CREATE_ACCOUNT) {
                         // 가입에 성공했다면, 인증서를 만듭니다.
@@ -156,8 +158,8 @@ public class LoadingFragment extends SuperFragment {
                                 Toast.makeText(control, "Can not update account", Toast.LENGTH_SHORT).show();
                             }
 
-                            // 메인 화면으로 이동합니다.
-                            startActivity = new Intent(control, MainActivity.class);
+                            // MainActivity 를 실행합니다.
+                            gotoMainActivity();
                         }
                     }
                 } catch (Exception ex) {
@@ -165,16 +167,12 @@ public class LoadingFragment extends SuperFragment {
                     dm.setDescription("An error occurred.\n" + ex.getMessage());
                     dm.show();
                 }
-
-                // 상태에 맞는 액티비티를 실행합니다.
-                startActivity(startActivity);
-                control.finish();
             }
         }
 
         @Override
         public void onFailed(int requestCode, Exception ex) {
-// 실패했습니다.
+            // 실패했습니다.
             String title;
             if(requestCode == REQUEST_CREATE_ACCOUNT) {
                 // 회원가입 처리 결과
@@ -209,7 +207,18 @@ public class LoadingFragment extends SuperFragment {
         @Override
         public void onSuccess(UserProfile result) {
             // 여기서 가입 인증서를 생성합니다.
+            MeProfile profile = new MeProfile(
+                    result.getId()+"",
+                    result.getNickname(),
+                    result.getProfileImagePath(),
+                    mnaUUID,
+                    mnaPublicId
+            );
+            profileManager.setProfile(profile);
 
+            // 첫 사용자 입니다.
+            // 여기서 첫 사용자에게 할 행위를 기입합니다
+            gotoMainActivity();
         }
     }
 
@@ -217,6 +226,21 @@ public class LoadingFragment extends SuperFragment {
         @Override
         public void onClick(DialogInterface dialog) {
             dialog.dismiss();
+            control.finish();
         }
+    }
+
+    private void gotoMainActivity() {
+        Handler handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                startActivity(new Intent(control, MainActivity.class));
+                control.finish();
+                return true;
+            }
+        });
+        handler.sendEmptyMessageDelayed(0, 1000);
+
+
     }
 }
