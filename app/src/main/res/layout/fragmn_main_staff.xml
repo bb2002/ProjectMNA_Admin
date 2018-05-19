@@ -1,6 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/staff_select_workspace_cont"
+        android:layout_margin="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사업장 선택"
+            android:textSize="18sp"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/staff_workspace_spinner"
+            android:layout_marginStart="8dp"/>
+    </LinearLayout>
 
+    <!-- 직원 정보가 있다면 이곳을 보여줍니다. -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/staff_info_container"
+        android:layout_below="@id/staff_select_workspace_cont"
+        android:layout_margin="16dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/staff_info_header"
+            android:orientation="horizontal"
+            android:background="#D9D9D9">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="근무중인 직원"
+                android:layout_margin="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/staff_info_nowworking"
+                android:text="0/0 명"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="16dp"/>
+        </RelativeLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/staff_info_listview"
+            android:layout_below="@id/staff_info_header"
+            android:layout_marginTop="8dp" />
+    </RelativeLayout>
+
+    <!-- 직원 정보가 없다면 여기를 보여줍니다. -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/staff_empty_view"
+        android:layout_below="@id/staff_select_workspace_cont"
+        android:layout_margin="16dp"
+        android:visibility="invisible">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="선택된 사업장이 없거나, 직원이 없습니다."/>
+    </RelativeLayout>
 </RelativeLayout>

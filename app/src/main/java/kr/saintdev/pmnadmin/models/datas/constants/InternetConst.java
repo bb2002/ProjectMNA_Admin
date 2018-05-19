@@ -16,4 +16,6 @@ public interface InternetConst {
 
     String CREATE_ACCOUNT = SERVER_HOST + "account/join.php";
     String AUTO_LOGIN_ACCOUNT = SERVER_HOST + "account/auto-login.php";
+
+    String UPDATE_MY_WORKSPACE = SERVER_HOST + "workspace/my-workspace.php";
 }
