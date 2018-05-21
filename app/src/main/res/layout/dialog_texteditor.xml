@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/texteditor_editor"
+        android:background="@null"
+        android:textColor="#333333"
+        android:hint="텍스트를 입력하세요."
+        android:textSize="14sp"
+        android:padding="8dp"
+        android:layout_margin="16dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/texteditor_commit"
+        android:layout_below="@id/texteditor_editor"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:textColor="#ffffff"
+        android:background="#33a966"
+        android:text="확인"/>
+</RelativeLayout>
