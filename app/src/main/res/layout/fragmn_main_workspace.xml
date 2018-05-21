@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ffffff">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/workspace_title"
+        android:text="매장 관리"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:layout_margin="16dp"
+        android:textColor="#333333"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/workspace_create_button"
+        android:background="#3aaf45"
+        android:textColor="#ffffff"
+        android:text="+ 새 매장 추가"
+        android:layout_alignParentBottom="true"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/workspace_listview"
+        android:layout_above="@id/workspace_create_button"
+        android:layout_margin="16dp"
+        android:layout_below="@id/workspace_title"/>
+</RelativeLayout>

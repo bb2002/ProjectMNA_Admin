@@ -1,5 +1,6 @@
 package kr.saintdev.pmnadmin.views.fragments;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 
 /**
@@ -11,4 +12,6 @@ import android.support.v4.app.Fragment;
 public class SuperFragment extends Fragment {
     public SuperFragment() {
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {}
 }
