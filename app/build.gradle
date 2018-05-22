@@ -28,4 +28,5 @@ dependencies {
 
     compile 'com.squareup.okhttp3:okhttp:3.10.0'
     compile group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }

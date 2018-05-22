@@ -25,8 +25,12 @@ public class HttpResponseObject {
         this.header = this.response.getJSONObject("header");
 
         // body 를 받습니다.
-        if(!this.response.isNull("body")) {
-            this.body = this.response.getJSONObject("body");
+        try {
+            if (!this.response.isNull("body")) {
+                this.body = this.response.getJSONObject("body");
+            }
+        } catch(JSONException jex) {
+            this.body = null;
         }
 
         // error 가 발생했는지 확인합니다

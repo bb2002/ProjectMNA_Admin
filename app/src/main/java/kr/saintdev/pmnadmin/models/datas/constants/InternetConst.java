@@ -19,4 +19,7 @@ public interface InternetConst {
 
     String UPDATE_MY_WORKSPACE = SERVER_HOST + "workspace/my-workspace.php";
     String CREATE_MY_WORKSPACE = SERVER_HOST + "workspace/create-workspace.php";
+
+    String UPDATE_MY_ALARM = SERVER_HOST + "alarm/my-alarm.php";
+    String DELETE_ALARM = SERVER_HOST + "alarm/delete-alarm.php";
 }

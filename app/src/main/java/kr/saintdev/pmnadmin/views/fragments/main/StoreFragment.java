@@ -45,7 +45,6 @@ public class StoreFragment extends SuperFragment {
     Button createStore = null;
 
     ArrayList<WorkspaceObject> workspaces = null;
-    ProgressManager pm = null;
     DialogManager dm = null;
 
     private static final int REQUEST_UPDATE_WORKSPACE = 0x0;        // 내 사업장 정보를 업데이트 한다.
@@ -63,7 +62,6 @@ public class StoreFragment extends SuperFragment {
         this.workspaceAdapter = new ArrayAdapter(control, android.R.layout.simple_list_item_1);
 
         this.workspaceListview.setAdapter(this.workspaceAdapter);
-        this.pm = new ProgressManager(control);
         this.dm = new DialogManager(control);
         this.dm.setOnYesButtonClickListener(new OnDialogClickHandler(), "OK");
         this.workspaces = new ArrayList<>();
@@ -79,7 +77,6 @@ public class StoreFragment extends SuperFragment {
 
     private void updateWorkspaceList() {
         // 자신의 사업장 정보를 가져옵니다.
-        this.pm.setMessage("사업장 정보를 가져오는 중...");
         HttpRequester requester =
                 new HttpRequester(InternetConst.UPDATE_MY_WORKSPACE, null, REQUEST_UPDATE_WORKSPACE, new OnBackgroundHandler(), control);
         requester.execute();
@@ -181,7 +178,7 @@ public class StoreFragment extends SuperFragment {
     class OnDialogClickHandler implements OnYesClickListener {
         @Override
         public void onClick(DialogInterface dialog) {
-
+            dialog.dismiss();
         }
     }
 }
