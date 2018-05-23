@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/workspace_light_container"
+        android:layout_weight="1">
+        <TableRow>
+            <ImageView
+                android:id="@+id/workspace_light_holl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </TableRow>
+    </TableLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/workspace_air_container"
+        android:layout_weight="1"></RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/workspace_door_container"
+        android:layout_weight="1"></RelativeLayout>
+</LinearLayout>
