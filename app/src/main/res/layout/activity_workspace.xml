@@ -3,28 +3,139 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/workspace_title_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="NULL"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/workspace_light_container"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:stretchColumns="*"
+        android:layout_margin="16dp"
+        android:background="@color/colorWhite"
+        android:gravity="center">
         <TableRow>
-            <ImageView
+            <ImageButton
                 android:id="@+id/workspace_light_holl"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_led_off"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:background="@null"/>
+
+            <ImageButton
+                android:id="@+id/workspace_light_kitchen"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_led_off"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:background="@null"/>
+
+            <ImageButton
+                android:id="@+id/workspace_light_terrace"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_led_off"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:background="@null"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="8dp">
+            <TextView
+                android:text="홀"
+                android:textSize="18sp"
+                android:gravity="center"/>
+            <TextView
+                android:text="주방"
+                android:textSize="18sp"
+                android:gravity="center"/>
+            <TextView
+                android:text="야외"
+                android:textSize="18sp"
+                android:gravity="center"/>
         </TableRow>
     </TableLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/workspace_air_container"
-        android:layout_weight="1"></RelativeLayout>
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/workspace_air_temp"
+            android:text="온도 : 0"
+            android:gravity="center"
+            android:background="@color/colorWhite"
+            android:textSize="18sp"
+            android:textColor="#333333"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:id="@+id/workspace_air_humi"
+            android:text="습도 : 0"
+            android:gravity="center"
+            android:background="@color/colorWhite"
+            android:textSize="18sp"
+            android:textColor="#333333"/>
+    </LinearLayout>
 
-    <RelativeLayout
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/workspace_door_container"
-        android:layout_weight="1"></RelativeLayout>
+        android:layout_weight="1"
+        android:stretchColumns="*"
+        android:layout_margin="16dp"
+        android:background="@color/colorWhite"
+        android:gravity="center">
+        <TableRow>
+            <ImageButton
+                android:id="@+id/workspace_door_lock"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_locker_locked"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:background="@null"/>
+
+            <ImageButton
+                android:id="@+id/workspace_door_open"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_locker_open"
+                android:padding="8dp"
+                android:scaleType="centerInside"
+                android:background="@null"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="8dp">
+            <TextView
+                android:text="잠금"
+                android:textSize="18sp"
+                android:gravity="center"/>
+            <TextView
+                android:text="해제"
+                android:textSize="18sp"
+                android:gravity="center"/>
+        </TableRow>
+    </TableLayout>
 </LinearLayout>

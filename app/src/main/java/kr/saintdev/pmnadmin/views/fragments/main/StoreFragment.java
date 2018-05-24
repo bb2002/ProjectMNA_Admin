@@ -1,12 +1,14 @@
 package kr.saintdev.pmnadmin.views.fragments.main;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -25,6 +27,7 @@ import kr.saintdev.pmnadmin.models.tasks.OnBackgroundWorkListener;
 import kr.saintdev.pmnadmin.models.tasks.http.HttpRequester;
 import kr.saintdev.pmnadmin.models.tasks.http.HttpResponseObject;
 import kr.saintdev.pmnadmin.views.activitys.MainActivity;
+import kr.saintdev.pmnadmin.views.activitys.WorkspaceActivity;
 import kr.saintdev.pmnadmin.views.fragments.SuperFragment;
 import kr.saintdev.pmnadmin.views.windows.dialog.DialogManager;
 import kr.saintdev.pmnadmin.views.windows.dialog.TextEditorDialog;
@@ -65,6 +68,8 @@ public class StoreFragment extends SuperFragment {
         this.dm = new DialogManager(control);
         this.dm.setOnYesButtonClickListener(new OnDialogClickHandler(), "OK");
         this.workspaces = new ArrayList<>();
+
+        this.workspaceListview.setOnItemClickListener(new OnListitemClickHandler());
 
         return v;
     }
@@ -172,6 +177,17 @@ public class StoreFragment extends SuperFragment {
         @Override
         public void onFailed(int requestCode, Exception ex) {
 
+        }
+    }
+
+    class OnListitemClickHandler implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            String name = (String) workspaceAdapter.getItem(position);
+
+            Intent intent = new Intent(control, WorkspaceActivity.class);
+            intent.putExtra("workspace-name", name);
+            startActivity(intent);
         }
     }
 
