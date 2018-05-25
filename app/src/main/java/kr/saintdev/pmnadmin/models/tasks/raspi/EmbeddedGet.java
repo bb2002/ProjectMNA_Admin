@@ -43,8 +43,8 @@ public class EmbeddedGet extends BackgroundWork<JSONObject> {
         con.setRequestMethod("GET");
 
         int responseCode = con.getResponseCode();
-        System.out.println("GET Response Code :: " + responseCode);
-        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+
+        if (responseCode == HttpURLConnection.HTTP_OK) {    // success
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));
             String inputLine;
@@ -56,11 +56,10 @@ public class EmbeddedGet extends BackgroundWork<JSONObject> {
             in.close();
 
             // print result
-            System.out.println(response.toString());
-        } else {
-            System.out.println("GET request not worked");
-        }
+            return new JSONObject(response.toString());
 
-        return null;
+        } else {
+            return null;
+        }
     }
 }

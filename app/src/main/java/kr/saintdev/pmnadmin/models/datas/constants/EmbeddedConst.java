@@ -15,6 +15,6 @@ public interface EmbeddedConst {
     // 각 부분에 대한 컨트롤
     String OFFICE_CONTROL_DOOR = RESPI_HOST + "door_lock";
     String OFFICE_CONTROL_HALL_LIGHT = RESPI_HOST + "hall/light";
-    String OFFICE_CONTROL_KITCHEN_LIGHT = RESPI_HOST + "terrace/light";
+    String OFFICE_CONTROL_KITCHEN_LIGHT = RESPI_HOST + "kitchen/light";
     String OFFICE_CONTROL_TERRACE_LIGHT = RESPI_HOST + "terrace/light";
 }

@@ -91,7 +91,6 @@ public class EmbeddedPost extends BackgroundWork<Boolean> {
                 return false;
             }
         } else {
-            Log.d("MNA", "Internal server error.");
             return false;
         }
     }
