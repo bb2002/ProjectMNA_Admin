@@ -1,6 +1,7 @@
 package kr.saintdev.pmnadmin.views.fragments.main;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -26,6 +28,7 @@ import kr.saintdev.pmnadmin.models.tasks.OnBackgroundWorkListener;
 import kr.saintdev.pmnadmin.models.tasks.http.HttpRequester;
 import kr.saintdev.pmnadmin.models.tasks.http.HttpResponseObject;
 import kr.saintdev.pmnadmin.views.activitys.MainActivity;
+import kr.saintdev.pmnadmin.views.activitys.alarms.JoinGrantActivity;
 import kr.saintdev.pmnadmin.views.adapters.AlarmAdapter;
 import kr.saintdev.pmnadmin.views.fragments.SuperFragment;
 import kr.saintdev.pmnadmin.views.windows.dialog.DialogManager;
@@ -66,6 +69,7 @@ public class AlarmFragment extends SuperFragment {
         this.adapter = new AlarmAdapter();
         this.alarms = new ArrayList<>();
         this.alarmListview.setAdapter(this.adapter);
+        this.alarmListview.setOnItemClickListener(new OnItemClickHandler());
 
         this.adapter.setDeleteClickHandler(new OnAlarmDeleteHandler());
         this.backgroundWorker = new OnBackgroundWorker();
@@ -86,6 +90,9 @@ public class AlarmFragment extends SuperFragment {
         requester.execute();
     }
 
+    /**
+     * 서버에서 알림 목록을 불러왔습니다.
+     */
     class OnBackgroundWorker implements OnBackgroundWorkListener {
         @Override
         public void onSuccess(int requestCode, BackgroundWork worker) {
@@ -155,6 +162,9 @@ public class AlarmFragment extends SuperFragment {
         }
     }
 
+    /**
+     * 다이얼로그 닫기를 선택했습니다.
+     */
     class OnDialogClickHandler implements OnYesClickListener {
         @Override
         public void onClick(DialogInterface dialog) {
@@ -162,6 +172,9 @@ public class AlarmFragment extends SuperFragment {
         }
     }
 
+    /**
+     * 알림 삭제 버튼을 눌렀읍니다.
+     */
     class OnAlarmDeleteHandler implements View.OnClickListener {
         @Override
         public void onClick(View v) {
@@ -178,6 +191,25 @@ public class AlarmFragment extends SuperFragment {
                     control
             );
             deleteRequester.execute();
+        }
+    }
+
+    /**
+     * 아이템을 선택했습니다.
+     */
+    class OnItemClickHandler implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            AlarmObject alarm = alarms.get(position);
+
+            switch(alarm.getAlarmType()) {
+                case "req.join":
+                    // 이 알림은 입사 승인을 위해 있습니다.
+                    Intent intent = new Intent(control, JoinGrantActivity.class);
+                    intent.putExtra("sender", alarm.getAlarmSender());
+                    startActivity(intent);
+                    break;
+            }
         }
     }
 
