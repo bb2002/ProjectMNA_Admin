@@ -23,4 +23,6 @@ public interface InternetConst {
 
     String UPDATE_MY_ALARM = SERVER_HOST + "alarm/my-alarm.php";
     String DELETE_ALARM = SERVER_HOST + "alarm/delete-alarm.php";
+
+    String STAFF_MANAGEMENT_ALLOW = SERVER_HOST + "management/staff-allow.php";
 }

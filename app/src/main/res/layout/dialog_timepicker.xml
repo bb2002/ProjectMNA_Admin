@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TimePicker
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_timepicker"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dialog_time_select"
+        android:layout_below="@id/dialog_timepicker"
+        android:layout_margin="16dp"
+        android:text="선택"
+        android:textColor="@color/colorWhite"
+        android:background="#38b33c"/>
+</RelativeLayout>

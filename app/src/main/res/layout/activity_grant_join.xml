@@ -73,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/grant_workspace_title"
-            android:text="근무지 설정"
+            android:text="직원 설정"
             android:textColor="@color/colorWhiteBlack"
             android:textSize="18sp"
             android:layout_margin="8dp"/>
@@ -82,6 +82,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:id="@+id/grant_workspace_spinner"/>
+
+        <EditText
+            android:id="@+id/grant_staff_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@null"
+            android:hint="급여를 입력하세요."
+            android:inputType="number"
+            android:padding="8dp"
+            android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
