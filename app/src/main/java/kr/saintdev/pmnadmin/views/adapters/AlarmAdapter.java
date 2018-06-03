@@ -64,7 +64,7 @@ public class AlarmAdapter extends BaseAdapter {
         TextView title = convertView.findViewById(R.id.alarm_title);
         TextView content = convertView.findViewById(R.id.alarm_content);
         if(this.listener != null) {
-            ImageButton deleteButton = convertView.findViewById(R.id.alarm_remove);
+            ImageView deleteButton = convertView.findViewById(R.id.alarm_remove);
             deleteButton.setTag(alarmObj);      // DeleteButton 에 AlarmObject 를 포인팅합니다.
             deleteButton.setOnClickListener(listener);
         }

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grant_staff_container"
+        android:layout_margin="16dp"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이름 : NULL"
+            android:id="@+id/grant_staff_name"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhiteBlack"
+            android:layout_margin="16dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grant_staff_part"
+        android:orientation="vertical"
+        android:layout_below="@id/grant_staff_container"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:background="@color/colorWhite">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/grant_part_title"
+            android:text="파트 설정"
+            android:textColor="@color/colorWhiteBlack"
+            android:textSize="18sp"
+            android:layout_margin="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="8dp">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/grant_part_start"
+                android:layout_marginEnd="16dp"
+                android:text="00:00"/>
+
+            <Button
+                android:id="@+id/grant_part_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/grant_workspace_container"
+        android:layout_margin="16dp"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_below="@id/grant_staff_part">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/grant_workspace_title"
+            android:text="직원 설정"
+            android:textColor="@color/colorWhiteBlack"
+            android:textSize="18sp"
+            android:layout_margin="8dp"/>
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:id="@+id/grant_workspace_spinner"/>
+
+        <EditText
+            android:id="@+id/grant_staff_money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@null"
+            android:hint="급여를 입력하세요."
+            android:inputType="number"
+            android:padding="8dp"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp">
+
+        <Button
+            android:id="@+id/grant_account_allow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="승인" />
+
+        <Button
+            android:id="@+id/grant_account_deny"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="거절" />
+    </LinearLayout>
+</RelativeLayout>
