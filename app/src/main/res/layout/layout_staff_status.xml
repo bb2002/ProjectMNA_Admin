@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="60dp"
+    android:background="@color/colorWhite">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/staff_status_name"
+        android:layout_marginLeft="16dp"
+        android:text="로딩 중"
+        android:layout_centerVertical="true"
+        android:textColor="#333333"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/staff_status_signtime"
+        android:layout_toRightOf="@id/staff_status_name"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:text="00:00-00:00"
+        android:textColor="#333333"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/staff_status_status"
+        android:text="미출근"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/colorPrimaryDark"/>
+</RelativeLayout>

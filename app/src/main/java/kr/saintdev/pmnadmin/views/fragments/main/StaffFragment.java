@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,6 +47,7 @@ public class StaffFragment extends SuperFragment {
     ListView staffList = null;
     RelativeLayout staffListContainer = null;
     RelativeLayout staffEmptyContainer = null;
+    TextView nowWorkspaceStatus = null;
 
     DialogManager dm = null;        // 대화 상자
     ProgressManager pm = null;      // 진행 프로그레스 바
@@ -69,6 +71,7 @@ public class StaffFragment extends SuperFragment {
         this.staffList = v.findViewById(R.id.staff_info_listview);
         this.staffListContainer = v.findViewById(R.id.staff_info_container);
         this.staffEmptyContainer = v.findViewById(R.id.staff_empty_view);
+        this.nowWorkspaceStatus = v.findViewById(R.id.staff_info_nowworking);
         this.selectWorkspace.setOnItemSelectedListener(new OnWorkspaceSelectHandler());
 
         // 대화창을 생성합니다.
@@ -95,7 +98,13 @@ public class StaffFragment extends SuperFragment {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             // 해당 workspace 에서 근무하는 staff 를 불러옵니다.
+            HashMap<String, Object> args = new HashMap<>();
+            WorkspaceObject workspaceObject = myWorkspaceArray.get(position);
+            args.put("workspace-uuid", workspaceObject.getWorkspaceUUID());
 
+            HttpRequester requester =
+                    new HttpRequester(InternetConst.MY_WORKSPACE_STATUS, args, REQUEST_UPDATE_STAFF_INFO, backgroundWorkHandler, control);
+            requester.execute();
         }
 
         @Override
@@ -149,11 +158,34 @@ public class StaffFragment extends SuperFragment {
                         // ListView 를 업데이트 합니다.
                         workspaceAdapter.notifyDataSetChanged();
                     } else {
-
+                        dm.setTitle("Internal server error.");
+                        dm.setDescription("An error occurred. : " + resp.getResponseResultCode());
+                        dm.show();
                     }
                 } else if (requestCode == REQUEST_UPDATE_STAFF_INFO) {
                     // 해당 Workspace 의 직원 정보를 불러왔습니다.
+                    if(resp.getResponseResultCode() == InternetConst.HTTP_OK) {
+                        // 응답 성공
+                        JSONObject body = resp.getBody();
+                        staffAdapter.clear();
 
+                        int workspaceStaffSize = body.getInt("workspace-staff-size");
+                        int workspaceWorkingSize = body.getInt("workspace-working-staff");
+                        JSONArray datas = body.getJSONArray("data");
+
+                        nowWorkspaceStatus.setText(workspaceWorkingSize + "/" + workspaceStaffSize + " 명 근무중");
+
+                        for(int i = 0; i < datas.length(); i ++) {
+                            JSONObject d = datas.getJSONObject(i);
+                            staffAdapter.addItem(d);
+                        }
+
+                        staffAdapter.notifyDataSetChanged();
+                    } else {
+                        dm.setTitle("Internal server error.");
+                        dm.setDescription("An error occurred. : " + resp.getResponseResultCode());
+                        dm.show();
+                    }
                 }
             } catch(Exception ex) {
                 // 예외 발생
