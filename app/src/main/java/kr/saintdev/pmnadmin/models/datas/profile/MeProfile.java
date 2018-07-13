@@ -30,6 +30,10 @@ public class MeProfile {
     }
 
     public String getKakaoProfileIcon() {
+        if(kakaoProfileIcon == null) {
+            this.kakaoProfileIcon = "http://saintdev.kr/mna/user_default_icon";
+        }
+
         return kakaoProfileIcon;
     }
 

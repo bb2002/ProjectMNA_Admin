@@ -7,7 +7,7 @@ package kr.saintdev.pmnadmin.models.datas.constants;
  */
 
 public interface EmbeddedConst {
-    String RESPI_HOST = "http://funniest.iptime.org:5001/";
+    String RESPI_HOST = "http://192.168.200.181:5001/";
 
     // 현재 사무실 상태를 불러올 수 있는 요청 주소
     String OFFICE_STATUS = RESPI_HOST + "status";

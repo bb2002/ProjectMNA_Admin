@@ -13,8 +13,10 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -30,7 +32,9 @@ import kr.saintdev.pmnadmin.models.tasks.http.HttpResponseObject;
 import kr.saintdev.pmnadmin.views.activitys.MainActivity;
 import kr.saintdev.pmnadmin.views.adapters.StaffInfoAdapter;
 import kr.saintdev.pmnadmin.views.fragments.SuperFragment;
+import kr.saintdev.pmnadmin.views.windows.dialog.ContextDialog;
 import kr.saintdev.pmnadmin.views.windows.dialog.DialogManager;
+import kr.saintdev.pmnadmin.views.windows.dialog.OnContextItemClickListener;
 import kr.saintdev.pmnadmin.views.windows.dialog.clicklistener.OnYesClickListener;
 import kr.saintdev.pmnadmin.views.windows.progress.ProgressManager;
 
@@ -59,6 +63,7 @@ public class StaffFragment extends SuperFragment {
 
     private static final int REQUEST_UPDATE_WORKSPACE = 0x0;        // 내 사업장 정보를 업데이트 한다.
     private static final int REQUEST_UPDATE_STAFF_INFO = 0x1;       // 사업장 내 직원 정보를 업데이트 한다.
+    private static final int REQUEST_SEND_MONEYOK_ALARM = 0x2;      // 월급 입금 완료 안내 발송
 
     @Nullable
     @Override
@@ -85,6 +90,7 @@ public class StaffFragment extends SuperFragment {
         this.staffAdapter = new StaffInfoAdapter();
         this.selectWorkspace.setAdapter(this.workspaceAdapter);     // Adapter 를 설정합니다.
         this.staffList.setAdapter(this.staffAdapter);
+        this.staffList.setOnItemClickListener(new OnStaffSelectListener());
 
         this.myWorkspaceArray = new ArrayList<>();
 
@@ -186,6 +192,14 @@ public class StaffFragment extends SuperFragment {
                         dm.setDescription("An error occurred. : " + resp.getResponseResultCode());
                         dm.show();
                     }
+                } else if(requestCode == REQUEST_SEND_MONEYOK_ALARM) {
+                    if(resp.getResponseResultCode() == InternetConst.HTTP_OK) {
+                        Toast.makeText(control, "메세지가 발송되었습니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        dm.setTitle("Internal server error.");
+                        dm.setDescription("An error occurred. : " + resp.getResponseResultCode());
+                        dm.show();
+                    }
                 }
             } catch(Exception ex) {
                 // 예외 발생
@@ -197,7 +211,60 @@ public class StaffFragment extends SuperFragment {
 
         @Override
         public void onFailed(int requestCode, Exception ex) {
+            dm.setTitle("Fatal error");
+            dm.setDescription(ex.getMessage());
+            dm.show();
+        }
+    }
 
+    private ContextDialog dialog = null;
+    class OnStaffSelectListener implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            dialog = new ContextDialog(control, "직원 설정", new String[] { "월급 입금 메세지" },  new OnContextItemClick(position));
+            dialog.show();
+        }
+
+        class OnContextItemClick implements OnContextItemClickListener {
+            private int pos = 0;
+
+            OnContextItemClick(int pos) {
+                this.pos = pos;
+            }
+
+            @Override
+            public void onItemClick(int position) {
+                switch(position) {
+                    case 0:         // 월급 입금 메세지를 전송한다.
+                        sendMoneyOkMessage(this.pos);
+                        break;
+                }
+            }
+        }
+
+        private void sendMoneyOkMessage(int targetStaff) {
+            // 해당 직원 정보를 불러와서 송금 완료 메세지를 보낸다.
+            JSONObject data = staffAdapter.getItem(targetStaff);
+
+            try {
+                String staffUUID = data.getString("staff-uuid");
+
+                HashMap<String, Object> args = new HashMap<>();
+                args.put("target-staff-uuid", staffUUID);
+                args.put("alarm-title", "급여 송금 완료");
+                args.put("alarm-content", "월급이 입금되었습니다.\n통장을 확인해보세요.");
+                args.put("alarm-type", "money");
+
+                HttpRequester requester =
+                        new HttpRequester(InternetConst.SEND_ALARM, args, REQUEST_SEND_MONEYOK_ALARM, new OnBackgroundWorkHandler(), control);
+                requester.execute();
+
+                if(dialog != null && dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            } catch(JSONException ex) {
+                Toast.makeText(control, "직원 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -205,7 +272,6 @@ public class StaffFragment extends SuperFragment {
         @Override
         public void onClick(DialogInterface dialog) {
             dialog.dismiss();
-
         }
     }
 
