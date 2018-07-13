@@ -41,6 +41,8 @@ public class EmbeddedGet extends BackgroundWork<JSONObject> {
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
+        con.setConnectTimeout(5000);
+        con.setReadTimeout(5000);
 
         int responseCode = con.getResponseCode();
 

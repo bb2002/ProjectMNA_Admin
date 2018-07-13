@@ -52,8 +52,8 @@ public class EmbeddedPost extends BackgroundWork<Boolean> {
         URL url = new URL(targetUrl);
 
         conn = (HttpURLConnection) url.openConnection();
-        conn.setConnectTimeout(10 * 1000);
-        conn.setReadTimeout(10 * 1000);
+        conn.setConnectTimeout(5 * 1000);
+        conn.setReadTimeout(5 * 1000);
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/json");
         conn.setRequestProperty("Accept", "application/json");

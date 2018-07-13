@@ -178,6 +178,8 @@ public class WorkspaceActivity extends AppCompatActivity {
 
         @Override
         public void onFailed(int requestCode, Exception ex) {
+            pm.disable();
+
             dm.setTitle("An error occurred");
             dm.setDescription(ex.getMessage());
             dm.show();
